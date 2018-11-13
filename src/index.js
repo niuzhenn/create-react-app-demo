@@ -15,9 +15,7 @@ getMainMenu();
 
 render(
   <Provider store={store}>
-    <App 
-      dispatch = {store.dispatch}
-    />
+    <App dispatch = {store.dispatch} />
   </Provider>,
   document.getElementById('root')
 );

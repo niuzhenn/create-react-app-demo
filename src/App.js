@@ -1,38 +1,38 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import Route from 'react-router-dom/Route';
+import Switch from 'react-router-dom/Switch';
+
 import './App.css';
-import MainMenu from './components/mainMenu/mainMenu';
 import ListView from './views/listView';
-import {} from './actions/actions';
+import Register from './views/register';
+
 
 class App extends Component {
 
-  render() {
-    const { dispatch, i18n, mainMenu, checkBox } = this.props;
+  getRouter() {
     return (
-      <div className="App">
-        <div className='mainMenu'>
+      <Switch>
+        <Route exact path="/" render={() => <div><ListView {...this.props}/></div>} />
+        <Route path="/register" render={() => <div><Register {...this.props}/></div>} />
+      </Switch>
+    )
+  }
+
+  render() {
+    return (
+      <BrowserRouter>
         {
-          mainMenu.length > 0 &&
-          <MainMenu 
-            dispatch = {dispatch}
-            mainMenu = {mainMenu}
-          />
+          this.getRouter()
         }
-        </div>
-        <div className='mainContent'>
-          <ListView 
-            dispatch = {dispatch}
-            checkBox = {checkBox}
-          />
-        </div>
-      </div>
+      </BrowserRouter>
     );
   }
 }
 
-function mapStateToProps(state)  {
-  return {...state};
+function mapStateToProps(state) {
+  return { ...state };
 }
 
 export default connect(mapStateToProps)(App);

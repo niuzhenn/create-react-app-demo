@@ -19,6 +19,7 @@
   },
   "proxy": "http://localhost:3208",
   "devDependencies": {
-    "babel-plugin-lodash": "^3.3.4"
+    "babel-plugin-lodash": "^3.3.4",
+    "react-router-dom": "^4.3.1"
   }
 }
