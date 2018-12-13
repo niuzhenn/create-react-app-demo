@@ -1,37 +1,35 @@
+import _ from 'lodash';
 import { Fetch } from '../lib/common-util';
+import { LOGIN_STATUS } from '../config/init';
 import store from '../store/store';
 
-export const I18N_CHANGE = 'I18N_CHANGE';
-export const MAIN_MENU_CHANGE = 'MAIN_MENU_CHANGE';
-export const CHECK_BOX_CHANGE = 'CHECK_BOX_CHANGE';
+export const TYPE = {
+  I18N_CHANGE: 'I18N_CHANGE',
+  UPDATE_ARTICAL_LIST: 'UPDATE_ARTICAL_LIST'
+}
 
-export function i18nChange(i18n) {
+export function actionCreater(type, payload) {
   return {
-    type: 'I18N_CHANGE',
-    payload: i18n
+    type: type,
+    payload: payload
   }
 }
 
-export function mainMenuChange(mainMenu) {
-  return {
-    type: 'MAIN_MENU_CHANGE',
-    payload: mainMenu
-  }
+export function getArticalList(query) {
+  Fetch('get', '/rest/listview/getArticalList').then((res) => {
+    let artList = [];
+    store.dispatch('UPDATE_ARTICAL_LIST', artList)
+  }).catch((err) => {
+    console.log(err);
+  })
 }
 
-export function checkBoxChange(checkObject) {
-  return {
-    type: 'CHECK_BOX_CHANGE',
-    payload: checkObject
-  }
-}
+export function loginCheck(loginParam) {
+  const { userName, password } = loginParam;
+  const params = `userName=${userName}&pwd=${password}`;
+  Fetch('get', '/rest/login/loginCheck?' + params).then((res) => {
 
-export function getMainMenu() {
-  Fetch('get', '/rest/getMainMenu').then((res) => {
-    res.map((_res, index) => {
-      _res.selected = index === 0;
-      _res.index = _res.index.toString();
-    })
-    store.dispatch(mainMenuChange(res));
+  }).catch((err) => {
+    console.log(err);
   })
 }

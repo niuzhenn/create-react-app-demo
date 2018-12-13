@@ -1,22 +1,29 @@
-export const CHECKBOX_INIT = [
+export const MAIN_MENU = [
   {
-    name: 'Apple',
-    selected: false
+    id: 'index',
+    text: '首页'
   },
   {
-    name: 'Samsung',
-    selected: false
+    id: 'blogs',
+    text: '文章'
   },
   {
-    name: 'Xiaomi',
-    selected: false
+    id: 'connect',
+    text: '联系'
   },
   {
-    name: 'Huawei',
-    selected: false
-  },
-  {
-    name: 'One Plus',
-    selected: false
+    id: 'login',
+    text: '登录'
   }
 ]
+
+export const LOGIN_STATUS = {
+  success: {},
+  error: {},
+  worngVerificationCode: {}
+}
+
+// export const STATU_CODE = {
+//   000001: "Success",
+//   900000: "Get data fail"
+// }
